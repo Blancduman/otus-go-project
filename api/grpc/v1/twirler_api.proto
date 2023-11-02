@@ -5,28 +5,20 @@ package twirler.v1;
 option go_package = "twirler/v1;twirlerv1";
 option php_namespace = "Twirler\\V1";
 
+import "v1/banner.proto";
+import "v1/slot.proto";
+import "v1/socialdemgroup.proto";
 import "google/protobuf/wrappers.proto";
 
 service TwirlerAPI {
-  rpc AttachBanner (AttachBannerRequest) returns (AttachBannerResponse);
-  rpc DetachBanner (DetachBannerRequest) returns (DetachBannerResponse);
+  rpc AttachBanner (AttachBannerToSlotRequest) returns (AttachBannerToSlotResponse);
+  rpc DetachBanner (DetachBannerToSlotRequest) returns (DetachBannerToSlotResponse);
   rpc IncrementCount (IncrementCountRequest) returns (IncrementCountResponse);
   rpc Gimme (GimmeRequest) returns (GimmeResponse);
+  rpc CreateBanner(BannerCreateRequest) returns (BannerCreateResponse);
+  rpc CreateSlot(SlotCreateRequest) returns (SlotCreateResponse);
+  rpc CreateSocialDemGroup(SocialDemGroupCreateRequest) returns (SocialDemGroupCreateResponse);
 }
-
-message AttachBannerRequest {
-  uint64 bannerID = 1;
-  uint64 slotID = 2;
-}
-
-message AttachBannerResponse {}
-
-message DetachBannerRequest {
-  uint64 slotID = 1;
-  uint64 bannerID = 2;
-}
-
-message DetachBannerResponse {}
 
 message IncrementCountRequest {
   uint64 slotID = 1;

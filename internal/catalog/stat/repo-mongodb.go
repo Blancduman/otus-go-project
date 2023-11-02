@@ -19,6 +19,17 @@ func NewMongoDBRepo(collection *mongo.Collection) *RepoMongoDB {
 	}
 }
 
+func (r RepoMongoDB) GetStat(ctx context.Context, slotID int64) (SlotStat, error) {
+	var doc slotStatDoc
+
+	err := r.collection.FindOne(ctx, bson.M{"_id": slotID}).Decode(&doc)
+	if errors.Is(err, mongo.ErrNoDocuments) {
+		return SlotStat{}, ErrNotFound
+	}
+
+	return doc.toModel(), errors.Wrap(err, "find stat by slot id")
+}
+
 func (r RepoMongoDB) IncrementClickedCount(ctx context.Context, slotID int64, bannerID int64, socialDemGroupID int64) error {
 	_, err := r.collection.UpdateOne(
 		ctx,
@@ -41,31 +52,31 @@ func (r RepoMongoDB) IncrementShownCount(ctx context.Context, slotID int64, bann
 	return errors.Wrap(err, "increment shown count")
 }
 
-//func (r RepoMongoDB) AddBannerToSlot(ctx context.Context, slotID int64, bannerID int64, socialDemGroupIDs []int64) error {
-//	m := bson.M{}
-//
-//	for _, v := range socialDemGroupIDs {
-//		m[fmt.Sprintf("%d.%d.clicked", bannerID, v)] = 0
-//		m[fmt.Sprintf("%d.%d.shown", bannerID, v)] = 0
-//	}
-//
-//	_, err := r.collection.UpdateOne(
-//		ctx,
-//		bson.M{"_id": slotID},
-//		bson.M{"$set": bson.M{"bannerStat": m}},
-//		options.Update().SetUpsert(true),
-//	)
-//
-//	return errors.Wrap(err, "add banner to slot in stat")
-//}
-//
-//func (r RepoMongoDB) RemoveBannerFromSlot(ctx context.Context, slotID int64, bannerID int64) error {
-//	_, err := r.collection.UpdateOne(
-//		ctx,
-//		bson.M{"_id": slotID},
-//		bson.M{"$unset": fmt.Sprintf("bannerStat.%d.%d", slotID, bannerID)},
-//		options.Update().SetUpsert(true),
-//	)
-//
-//	return errors.Wrap(err, "remove banner to slot in stat")
-//}
+func (r RepoMongoDB) AddBannerToSlot(ctx context.Context, slotID int64, bannerID int64, socialDemGroupIDs []int64) error {
+	m := bson.M{}
+
+	for _, v := range socialDemGroupIDs {
+		m[fmt.Sprintf("%d.%d.clicked", bannerID, v)] = 0
+		m[fmt.Sprintf("%d.%d.shown", bannerID, v)] = 0
+	}
+
+	_, err := r.collection.UpdateOne(
+		ctx,
+		bson.M{"_id": slotID},
+		bson.M{"$set": bson.M{"bannerStat": m}},
+		options.Update().SetUpsert(true),
+	)
+
+	return errors.Wrap(err, "add banner to slot in stat")
+}
+
+func (r RepoMongoDB) RemoveBannerFromSlot(ctx context.Context, slotID int64, bannerID int64) error {
+	_, err := r.collection.UpdateOne(
+		ctx,
+		bson.M{"_id": slotID},
+		bson.M{"$unset": fmt.Sprintf("bannerStat.%d.%d", slotID, bannerID)},
+		options.Update().SetUpsert(true),
+	)
+
+	return errors.Wrap(err, "remove banner to slot in stat")
+}

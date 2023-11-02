@@ -15,6 +15,7 @@ type Config struct {
 	Mongo Mongo
 	HTTP  HTTP
 	Kafka Kafka
+	GRPC  GRPC
 }
 
 type App struct {

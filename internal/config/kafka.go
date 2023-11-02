@@ -5,10 +5,16 @@ type Kafka struct {
 	User           string   `envconfig:"KAFKA_USER"`
 	Password       string   `envconfig:"KAFKA_PASSWORD"`
 	Brokers        []string `envconfig:"KAFKA_BROKERS"`
-	TopicUpdating  string   `envconfig:"KAFKA_TOPIC_UPDATING"`
-	TopicDeleting  string   `envconfig:"KAFKA_TOPIC_DELETING"`
-	ConsumerGroup  string   `envconfig:"KAFKA_CONSUMER_GROUP"`
-	TopicProducing string   `envconfig:"KAFKA_TOPIC_PRODUCING"`
+	Topics         KafkaTopics
+	SchemaRegistry KafkaSchemaRegistry
+}
+
+type KafkaTopics struct {
+	Stat string `envconfig:"KAFKA_TOPIC_STAT"`
+}
+
+type KafkaSchemaRegistry struct {
+	URL string `envconfig:"KAFKA_SCHEMA_REGISTRY_URL"`
 }
 
 func (k Kafka) SASL() bool {

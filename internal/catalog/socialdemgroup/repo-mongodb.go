@@ -31,6 +31,23 @@ func (r RepoMongoDB) Get(ctx context.Context, id int64) (SocialDemGroup, error) 
 	return doc.toModel(), errors.Wrap(err, "find social dem group by id")
 }
 
+func (r RepoMongoDB) GetAll(ctx context.Context) ([]SocialDemGroup, error) {
+	var docs []socialDemGroupDoc
+
+	err := r.collection.FindOne(ctx, bson.M{}).Decode(&docs)
+	if errors.Is(err, mongo.ErrNoDocuments) {
+		return nil, ErrNotFound
+	}
+
+	res := make([]SocialDemGroup, len(docs))
+
+	for i, d := range docs {
+		res[i] = d.toModel()
+	}
+
+	return res, errors.Wrap(err, "find social dem group by id")
+}
+
 func (r RepoMongoDB) Create(ctx context.Context, socialDemGroup SocialDemGroup) (int64, error) {
 	session, err := r.collection.Database().Client().StartSession(options.Session())
 	if err != nil {

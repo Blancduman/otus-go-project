@@ -10,6 +10,6 @@ type BannerStat map[int64]SocialDemGroupStat
 type SocialDemGroupStat map[int64]Stat
 
 type Stat struct {
-	Clicked int64 `bson:"clicked"`
-	Shown   int64 `bson:"shown"`
+	Clicked int64
+	Shown   int64
 }

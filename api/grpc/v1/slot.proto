@@ -1,0 +1,30 @@
+syntax = "proto3";
+
+package twirler.v1;
+
+option go_package = "twirler/v1;twirlerv1";
+option php_namespace = "Twirler\\V1";
+
+import "google/protobuf/wrappers.proto";
+
+message SlotCreateRequest {
+  string description = 1;
+}
+
+message SlotCreateResponse {
+  int64 ID = 1;
+}
+
+message AttachBannerToSlotRequest {
+  uint64 bannerID = 1;
+  uint64 slotID = 2;
+}
+
+message AttachBannerToSlotResponse {}
+
+message DetachBannerToSlotRequest {
+  uint64 slotID = 1;
+  uint64 bannerID = 2;
+}
+
+message DetachBannerToSlotResponse {}

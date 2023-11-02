@@ -41,9 +41,6 @@ func (d socialDemGroupStatDoc) toModel() SocialDemGroupStat {
 	return m
 }
 
-func (d statDoc) toModel() Stat {
-	return Stat{
-		Clicked: d.Clicked,
-		Shown:   d.Shown,
-	}
+func (s statDoc) toModel() Stat {
+	return Stat(s)
 }

@@ -96,30 +96,30 @@ func (r RepoMongoDB) update(ctx context.Context, slot Slot) (int64, error) {
 	return res.UpsertedCount + res.ModifiedCount, nil
 }
 
-func (r RepoMongoDB) AttachBanner(ctx context.Context, id int64, bannerID int64) (int64, error) {
-	res, err := r.collection.UpdateOne(
-		ctx,
-		bson.M{"_id": id},
-		bson.M{"$push": bson.M{"bannerIDs": bannerID}},
-		options.Update().SetUpsert(false),
-	)
-	if err != nil {
-		return 0, errors.Wrap(err, "attach banner")
-	}
-
-	return res.ModifiedCount, nil
-}
-
-func (r RepoMongoDB) DetachBanner(ctx context.Context, id int64, bannerID int64) (int64, error) {
-	res, err := r.collection.UpdateOne(
-		ctx,
-		bson.M{"_id": id},
-		bson.M{"$pull": bson.M{"bannerIDs": bannerID}},
-		options.Update(),
-	)
-	if err != nil {
-		return 0, errors.Wrap(err, "detach banner")
-	}
-
-	return res.ModifiedCount, nil
-}
+//func (r RepoMongoDB) AttachBanner(ctx context.Context, id int64, bannerID int64) (int64, error) {
+//	res, err := r.collection.UpdateOne(
+//		ctx,
+//		bson.M{"_id": id},
+//		bson.M{"$push": bson.M{"bannerIDs": bannerID}},
+//		options.Update().SetUpsert(false),
+//	)
+//	if err != nil {
+//		return 0, errors.Wrap(err, "attach banner")
+//	}
+//
+//	return res.ModifiedCount, nil
+//}
+//
+//func (r RepoMongoDB) DetachBanner(ctx context.Context, id int64, bannerID int64) (int64, error) {
+//	res, err := r.collection.UpdateOne(
+//		ctx,
+//		bson.M{"_id": id},
+//		bson.M{"$pull": bson.M{"bannerIDs": bannerID}},
+//		options.Update(),
+//	)
+//	if err != nil {
+//		return 0, errors.Wrap(err, "detach banner")
+//	}
+//
+//	return res.ModifiedCount, nil
+//}

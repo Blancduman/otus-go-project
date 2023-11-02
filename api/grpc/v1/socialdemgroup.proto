@@ -1,0 +1,16 @@
+syntax = "proto3";
+
+package twirler.v1;
+
+option go_package = "twirler/v1;twirlerv1";
+option php_namespace = "Twirler\\V1";
+
+import "google/protobuf/wrappers.proto";
+
+message SocialDemGroupCreateRequest {
+  string description = 1;
+}
+
+message SocialDemGroupCreateResponse {
+  int64 ID = 1;
+}
