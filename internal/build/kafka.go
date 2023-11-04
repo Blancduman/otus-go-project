@@ -14,6 +14,7 @@ func (b *Builder) kafkaSyncProducer() (sarama.SyncProducer, error) {
 	config.Producer.RequiredAcks = sarama.WaitForAll
 	config.Producer.Return.Errors = true
 	config.Producer.Return.Successes = true
+	config.ClientID = b.config.App.Name
 
 	producer, err := sarama.NewSyncProducer(b.config.Kafka.Brokers, config)
 	if err != nil {

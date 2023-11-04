@@ -2,17 +2,14 @@ package external
 
 import (
 	"context"
-	"github.com/Blancduman/banners-rotation/internal/catalog/stat"
-	"github.com/Blancduman/banners-rotation/internal/ucb1"
-	"go.mongodb.org/mongo-driver/mongo"
-	"go.mongodb.org/mongo-driver/mongo/options"
-	"go.mongodb.org/mongo-driver/mongo/readpref"
-
 	"github.com/Blancduman/banners-rotation/internal/catalog/banner"
 	"github.com/Blancduman/banners-rotation/internal/catalog/slot"
 	"github.com/Blancduman/banners-rotation/internal/catalog/socialdemgroup"
+	"github.com/Blancduman/banners-rotation/internal/catalog/stat"
+	"github.com/Blancduman/banners-rotation/internal/ucb1"
 	twirler_v1 "github.com/Blancduman/banners-rotation/pkg/twirler/v1"
 	"github.com/pkg/errors"
+	"go.mongodb.org/mongo-driver/mongo"
 )
 
 type Server struct {
@@ -60,34 +57,20 @@ func NewServer(s Services, c *mongo.Client) *Server {
 }
 
 func (s *Server) AttachBanner(ctx context.Context, req *twirler_v1.AttachBannerToSlotRequest) (*twirler_v1.AttachBannerToSlotResponse, error) {
-	session, err := s.client.StartSession(options.Session())
+	groups, err := s.services.SocialDemGroupService.GetAll(ctx)
 	if err != nil {
-		return nil, errors.Wrap(err, "can not start session")
+		return nil, errors.Wrap(err, "get all social dem groups from social dem group service")
 	}
 
-	defer session.EndSession(ctx)
+	groupIDs := make([]int64, len(groups))
 
-	_, err = session.WithTransaction(ctx, func(ctxSession mongo.SessionContext) (interface{}, error) {
-		groups, err := s.services.SocialDemGroupService.GetAll(ctxSession)
-		if err != nil {
-			return nil, err
-		}
+	for i, v := range groups {
+		groupIDs[i] = v.ID
+	}
 
-		groupIDs := make([]int64, len(groups))
-
-		for i, v := range groups {
-			groupIDs[i] = v.ID
-		}
-
-		err = s.services.StatService.AddBannerToSlot(ctxSession, int64(req.GetSlotID()), int64(req.GetBannerID()), groupIDs)
-		if err != nil {
-			return nil, err
-		}
-
-		return nil, nil
-	}, options.Transaction().SetReadPreference(readpref.Primary()))
+	err = s.services.StatService.AddBannerToSlot(ctx, int64(req.GetSlotID()), int64(req.GetBannerID()), groupIDs)
 	if err != nil {
-		return nil, errors.Wrap(err, "attach banner from service")
+		return nil, errors.Wrap(err, "add banner to slot stat service")
 	}
 
 	return &twirler_v1.AttachBannerToSlotResponse{}, nil

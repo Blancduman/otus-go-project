@@ -2,11 +2,13 @@ package main
 
 import (
 	"context"
-	"github.com/Blancduman/banners-rotation/cmd"
-	"github.com/Blancduman/banners-rotation/internal/config"
+	"os"
+
 	"github.com/rs/zerolog"
 	"github.com/rs/zerolog/log"
-	"os"
+
+	"github.com/Blancduman/banners-rotation/cmd"
+	"github.com/Blancduman/banners-rotation/internal/config"
 )
 
 func main() {
