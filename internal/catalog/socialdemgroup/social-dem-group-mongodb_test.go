@@ -1,8 +1,9 @@
 package socialdemgroup
 
 import (
-	"github.com/stretchr/testify/assert"
 	"testing"
+
+	"github.com/stretchr/testify/assert"
 )
 
 func Test_SocialDemGroup_ToModel(t *testing.T) {

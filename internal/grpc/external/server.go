@@ -2,6 +2,7 @@ package external
 
 import (
 	"context"
+
 	"github.com/Blancduman/banners-rotation/internal/catalog/banner"
 	"github.com/Blancduman/banners-rotation/internal/catalog/slot"
 	"github.com/Blancduman/banners-rotation/internal/catalog/socialdemgroup"
@@ -30,8 +31,6 @@ type BannerService interface {
 }
 
 type SlotService interface {
-	//AttachBanner(ctx context.Context, id int64, bannerID int64) (int64, error)
-	//DetachBanner(ctx context.Context, id int64, bannerID int64) (int64, error)
 	Create(ctx context.Context, slot slot.Slot) (int64, error)
 }
 
@@ -56,7 +55,10 @@ func NewServer(s Services, c *mongo.Client) *Server {
 	}
 }
 
-func (s *Server) AttachBanner(ctx context.Context, req *twirler_v1.AttachBannerToSlotRequest) (*twirler_v1.AttachBannerToSlotResponse, error) {
+func (s *Server) AttachBanner(
+	ctx context.Context,
+	req *twirler_v1.AttachBannerToSlotRequest,
+) (*twirler_v1.AttachBannerToSlotResponse, error) {
 	groups, err := s.services.SocialDemGroupService.GetAll(ctx)
 	if err != nil {
 		return nil, errors.Wrap(err, "get all social dem groups from social dem group service")
@@ -76,7 +78,10 @@ func (s *Server) AttachBanner(ctx context.Context, req *twirler_v1.AttachBannerT
 	return &twirler_v1.AttachBannerToSlotResponse{}, nil
 }
 
-func (s *Server) DetachBanner(ctx context.Context, req *twirler_v1.DetachBannerToSlotRequest) (*twirler_v1.DetachBannerToSlotResponse, error) {
+func (s *Server) DetachBanner(
+	ctx context.Context,
+	req *twirler_v1.DetachBannerToSlotRequest,
+) (*twirler_v1.DetachBannerToSlotResponse, error) {
 	err := s.services.StatService.RemoveBannerFromSlot(ctx, int64(req.GetSlotID()), int64(req.GetBannerID()))
 	if err != nil {
 		return nil, errors.Wrap(err, "detach banner from service")
@@ -85,8 +90,16 @@ func (s *Server) DetachBanner(ctx context.Context, req *twirler_v1.DetachBannerT
 	return &twirler_v1.DetachBannerToSlotResponse{}, nil
 }
 
-func (s *Server) IncrementCount(ctx context.Context, req *twirler_v1.IncrementCountRequest) (*twirler_v1.IncrementCountResponse, error) {
-	err := s.services.StatService.IncrementClickedCount(ctx, int64(req.GetSlotID()), int64(req.GetBannerID()), int64(req.GetBannerID()))
+func (s *Server) IncrementCount(
+	ctx context.Context,
+	req *twirler_v1.IncrementCountRequest,
+) (*twirler_v1.IncrementCountResponse, error) {
+	err := s.services.StatService.IncrementClickedCount(
+		ctx,
+		int64(req.GetSlotID()),
+		int64(req.GetBannerID()),
+		int64(req.GetBannerID()),
+	)
 	if err != nil {
 		return nil, errors.Wrap(err, "increment count from service")
 	}
@@ -121,7 +134,10 @@ func (s *Server) Gimme(ctx context.Context, req *twirler_v1.GimmeRequest) (*twir
 	return &twirler_v1.GimmeResponse{BannerID: uint64(bannerID)}, nil
 }
 
-func (s *Server) CreateBanner(ctx context.Context, req *twirler_v1.BannerCreateRequest) (*twirler_v1.BannerCreateResponse, error) {
+func (s *Server) CreateBanner(
+	ctx context.Context,
+	req *twirler_v1.BannerCreateRequest,
+) (*twirler_v1.BannerCreateResponse, error) {
 	ID, err := s.services.BannerService.Create(ctx, banner.Banner{
 		ID:          0,
 		Description: req.GetDescription(),
@@ -133,7 +149,10 @@ func (s *Server) CreateBanner(ctx context.Context, req *twirler_v1.BannerCreateR
 	return &twirler_v1.BannerCreateResponse{ID: ID}, nil
 }
 
-func (s *Server) CreateSlot(ctx context.Context, req *twirler_v1.SlotCreateRequest) (*twirler_v1.SlotCreateResponse, error) {
+func (s *Server) CreateSlot(
+	ctx context.Context,
+	req *twirler_v1.SlotCreateRequest,
+) (*twirler_v1.SlotCreateResponse, error) {
 	ID, err := s.services.SlotService.Create(ctx, slot.Slot{
 		ID:          0,
 		Description: req.GetDescription(),
@@ -145,7 +164,10 @@ func (s *Server) CreateSlot(ctx context.Context, req *twirler_v1.SlotCreateReque
 	return &twirler_v1.SlotCreateResponse{ID: ID}, nil
 }
 
-func (s *Server) CreateSocialDemGroup(ctx context.Context, req *twirler_v1.SocialDemGroupCreateRequest) (*twirler_v1.SocialDemGroupCreateResponse, error) {
+func (s *Server) CreateSocialDemGroup(
+	ctx context.Context,
+	req *twirler_v1.SocialDemGroupCreateRequest,
+) (*twirler_v1.SocialDemGroupCreateResponse, error) {
 	ID, err := s.services.SocialDemGroupService.Create(ctx, socialdemgroup.SocialDemGroup{
 		ID:          0,
 		Description: req.GetDescription(),

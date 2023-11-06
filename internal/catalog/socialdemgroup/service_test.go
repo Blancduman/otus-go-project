@@ -4,12 +4,11 @@ import (
 	"context"
 	"testing"
 
+	"github.com/Blancduman/banners-rotation/internal/catalog/socialdemgroup"
+	"github.com/Blancduman/banners-rotation/internal/catalog/socialdemgroup/mocks"
 	"github.com/pkg/errors"
 	"github.com/stretchr/testify/mock"
 	"github.com/stretchr/testify/require"
-
-	"github.com/Blancduman/banners-rotation/internal/catalog/socialdemgroup"
-	"github.com/Blancduman/banners-rotation/internal/catalog/socialdemgroup/mocks"
 )
 
 func Test_Get(t *testing.T) {
@@ -65,7 +64,11 @@ func Test_Create(t *testing.T) {
 		m := mocks.NewRepo(t)
 		service := socialdemgroup.NewService(m)
 
-		m.On("Create", mock.Anything, mock.AnythingOfType("socialdemgroup.SocialDemGroup")).Return(int64(0), errors.New("foo")).Once()
+		m.On(
+			"Create",
+			mock.Anything,
+			mock.AnythingOfType("socialdemgroup.SocialDemGroup"),
+		).Return(int64(0), errors.New("foo")).Once()
 		id, err := service.Create(ctx, socialdemgroup.Fixture1())
 		require.Error(t, err)
 		require.Equal(t, int64(0), id)

@@ -36,12 +36,6 @@ func (s *Service) Create(ctx context.Context, slot Slot) (int64, error) {
 
 func (s *Service) Get(ctx context.Context, id int64) (Slot, error) {
 	slot, err := s.repo.Get(ctx, id)
-	//if errors.Is(err, ErrNotFound) {
-	//	return Slot{
-	//		ID:          id,
-	//		Description: "",
-	//	}, nil
-	//}
 
 	return slot, errors.Wrapf(err, "get slot %d", id)
 }
@@ -61,19 +55,3 @@ func (s *Service) Delete(ctx context.Context, id int64) error {
 
 	return errors.Wrapf(err, "delete slot %d", id)
 }
-
-//func (s *Service) AttachBanner(ctx context.Context, id int64, bannerID int64) (int64, error) {
-//	s.wg.Add(1)
-//	res, err := s.repo.AttachBanner(ctx, id, bannerID)
-//	s.wg.Done()
-//
-//	return res, errors.Wrapf(err, "attach banner %d to slot %d", bannerID, id)
-//}
-//
-//func (s *Service) DetachBanner(ctx context.Context, id int64, bannerID int64) (int64, error) {
-//	s.wg.Add(1)
-//	res, err := s.repo.DetachBanner(ctx, id, bannerID)
-//	s.wg.Done()
-//
-//	return res, errors.Wrapf(err, "detach banner %d to slot %d", bannerID, id)
-//}

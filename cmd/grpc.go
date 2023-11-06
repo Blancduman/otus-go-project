@@ -3,12 +3,11 @@ package cmd
 import (
 	"context"
 
+	"github.com/Blancduman/banners-rotation/internal/build"
+	"github.com/Blancduman/banners-rotation/internal/config"
 	"github.com/pkg/errors"
 	"github.com/spf13/cobra"
 	grpclib "google.golang.org/grpc"
-
-	"github.com/Blancduman/banners-rotation/internal/build"
-	"github.com/Blancduman/banners-rotation/internal/config"
 )
 
 func grpcCmd(ctx context.Context, conf config.Config) *cobra.Command {
@@ -16,7 +15,7 @@ func grpcCmd(ctx context.Context, conf config.Config) *cobra.Command {
 		Use:   "grpc",
 		Short: "start grpc server listening",
 		RunE: func(cmd *cobra.Command, args []string) error {
-			builder := build.New(ctx, conf)
+			builder := build.New(conf)
 			ctx, cancel := context.WithCancel(ctx)
 			defer cancel()
 

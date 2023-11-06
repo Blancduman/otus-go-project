@@ -3,10 +3,11 @@ package stat
 import (
 	"context"
 	"fmt"
-	"github.com/Blancduman/banners-rotation/internal/reporter/payload"
-	"github.com/pkg/errors"
 	"sync"
 	"time"
+
+	"github.com/Blancduman/banners-rotation/internal/reporter/payload"
+	"github.com/pkg/errors"
 )
 
 type Service struct {
@@ -36,14 +37,19 @@ func (s *Service) GetStat(ctx context.Context, slotID int64) (SlotStat, error) {
 	return stat, errors.Wrapf(err, "get stat %d", slotID)
 }
 
-func (s *Service) IncrementClickedCount(ctx context.Context, slotID int64, bannerID int64, socialDemGroupID int64) error {
+func (s *Service) IncrementClickedCount( //nolint: dupl
+	ctx context.Context,
+	slotID int64,
+	bannerID int64,
+	socialDemGroupID int64,
+) error {
 	slotStat, err := s.repo.GetStat(ctx, slotID)
 	if err != nil {
 		return errors.Wrap(err, "get slot from service")
 	}
 
 	if _, ok := slotStat.BannerStat[bannerID]; !ok {
-		return errors.New(fmt.Sprintf("banner %d is not attached to slot %d", slotID, bannerID))
+		return fmt.Errorf("banner %d is not attached to slot %d", slotID, bannerID)
 	}
 
 	s.wg.Add(1)
@@ -61,20 +67,31 @@ func (s *Service) IncrementClickedCount(ctx context.Context, slotID int64, banne
 		Timestamp:        time.Now(),
 	})
 	if err != nil {
-		return errors.Wrapf(err, "faild to send click message to kafka slot %d banner %d group %d", slotID, bannerID, socialDemGroupID)
+		return errors.Wrapf(
+			err,
+			"faild to send click message to kafka slot %d banner %d group %d",
+			slotID,
+			bannerID,
+			socialDemGroupID,
+		)
 	}
 
 	return nil
 }
 
-func (s *Service) IncrementShownCount(ctx context.Context, slotID int64, bannerID int64, socialDemGroupID int64) error {
+func (s *Service) IncrementShownCount( //nolint: dupl
+	ctx context.Context,
+	slotID int64,
+	bannerID int64,
+	socialDemGroupID int64,
+) error {
 	slotStat, err := s.repo.GetStat(ctx, slotID)
 	if err != nil {
 		return errors.Wrap(err, "get slot from service")
 	}
 
 	if _, ok := slotStat.BannerStat[bannerID]; !ok {
-		return errors.New(fmt.Sprintf("banner %d is not attached to slot %d", slotID, bannerID))
+		return fmt.Errorf("banner %d is not attached to slot %d", slotID, bannerID)
 	}
 
 	s.wg.Add(1)
@@ -92,7 +109,13 @@ func (s *Service) IncrementShownCount(ctx context.Context, slotID int64, bannerI
 		Timestamp:        time.Now(),
 	})
 	if err != nil {
-		return errors.Wrapf(err, "faild to send shown message to kafka slot %d banner %d group %d", slotID, bannerID, socialDemGroupID)
+		return errors.Wrapf(
+			err,
+			"faild to send shown message to kafka slot %d banner %d group %d",
+			slotID,
+			bannerID,
+			socialDemGroupID,
+		)
 	}
 
 	return nil

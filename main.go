@@ -4,11 +4,10 @@ import (
 	"context"
 	"os"
 
-	"github.com/rs/zerolog"
-	"github.com/rs/zerolog/log"
-
 	"github.com/Blancduman/banners-rotation/cmd"
 	"github.com/Blancduman/banners-rotation/internal/config"
+	"github.com/rs/zerolog"
+	"github.com/rs/zerolog/log"
 )
 
 func main() {

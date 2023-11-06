@@ -4,12 +4,11 @@ import (
 	"context"
 	"testing"
 
+	"github.com/Blancduman/banners-rotation/internal/catalog/slot"
+	"github.com/Blancduman/banners-rotation/internal/catalog/slot/mocks"
 	"github.com/pkg/errors"
 	"github.com/stretchr/testify/mock"
 	"github.com/stretchr/testify/require"
-
-	"github.com/Blancduman/banners-rotation/internal/catalog/slot"
-	"github.com/Blancduman/banners-rotation/internal/catalog/slot/mocks"
 )
 
 func Test_Get(t *testing.T) {

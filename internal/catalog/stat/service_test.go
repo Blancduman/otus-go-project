@@ -2,13 +2,13 @@ package stat_test
 
 import (
 	"context"
-	"github.com/pkg/errors"
-	"github.com/stretchr/testify/mock"
-	"github.com/stretchr/testify/require"
 	"testing"
 
 	"github.com/Blancduman/banners-rotation/internal/catalog/stat"
 	"github.com/Blancduman/banners-rotation/internal/catalog/stat/mocks"
+	"github.com/pkg/errors"
+	"github.com/stretchr/testify/mock"
+	"github.com/stretchr/testify/require"
 )
 
 func Test_GetStat(t *testing.T) {
@@ -56,7 +56,7 @@ func Test_GetStat(t *testing.T) {
 	})
 }
 
-func Test_IncrementClickedCount(t *testing.T) {
+func Test_IncrementClickedCount(t *testing.T) { //nolint: dupl
 	t.Parallel()
 
 	defaultSlotStat := stat.SlotStat{}
@@ -88,7 +88,13 @@ func Test_IncrementClickedCount(t *testing.T) {
 				1: map[int64]stat.Stat{},
 			},
 		}, nil).Once()
-		m.On("IncrementClickedCount", mock.Anything, mock.AnythingOfType("int64"), mock.AnythingOfType("int64"), mock.AnythingOfType("int64")).Return(errors.New("foo")).Once()
+		m.On(
+			"IncrementClickedCount",
+			mock.Anything,
+			mock.AnythingOfType("int64"),
+			mock.AnythingOfType("int64"),
+			mock.AnythingOfType("int64"),
+		).Return(errors.New("foo")).Once()
 		err2 := service.IncrementClickedCount(ctx, 1, 1, 1)
 		require.Error(t, err2)
 
@@ -98,8 +104,18 @@ func Test_IncrementClickedCount(t *testing.T) {
 				1: map[int64]stat.Stat{},
 			},
 		}, nil).Once()
-		m.On("IncrementClickedCount", mock.Anything, mock.AnythingOfType("int64"), mock.AnythingOfType("int64"), mock.AnythingOfType("int64")).Return(nil).Once()
-		p.On("Produce", mock.Anything, mock.AnythingOfType("payload.ClickStat")).Return(errors.New("foo")).Once()
+		m.On(
+			"IncrementClickedCount",
+			mock.Anything,
+			mock.AnythingOfType("int64"),
+			mock.AnythingOfType("int64"),
+			mock.AnythingOfType("int64"),
+		).Return(nil).Once()
+		p.On(
+			"Produce",
+			mock.Anything,
+			mock.AnythingOfType("payload.ClickStat"),
+		).Return(errors.New("foo")).Once()
 		err3 := service.IncrementClickedCount(ctx, 1, 1, 1)
 		require.Error(t, err3)
 	})
@@ -118,14 +134,24 @@ func Test_IncrementClickedCount(t *testing.T) {
 				1: map[int64]stat.Stat{},
 			},
 		}, nil).Once()
-		m.On("IncrementClickedCount", mock.Anything, mock.AnythingOfType("int64"), mock.AnythingOfType("int64"), mock.AnythingOfType("int64")).Return(nil).Once()
-		p.On("Produce", mock.Anything, mock.AnythingOfType("payload.ClickStat")).Return(nil).Once()
+		m.On(
+			"IncrementClickedCount",
+			mock.Anything,
+			mock.AnythingOfType("int64"),
+			mock.AnythingOfType("int64"),
+			mock.AnythingOfType("int64"),
+		).Return(nil).Once()
+		p.On(
+			"Produce",
+			mock.Anything,
+			mock.AnythingOfType("payload.ClickStat"),
+		).Return(nil).Once()
 		err2 := service.IncrementClickedCount(ctx, 1, 1, 1)
 		require.NoError(t, err2)
 	})
 }
 
-func Test_IncrementShownCount(t *testing.T) {
+func Test_IncrementShownCount(t *testing.T) { //nolint: dupl
 	t.Parallel()
 
 	defaultSlotStat := stat.SlotStat{}
@@ -157,7 +183,13 @@ func Test_IncrementShownCount(t *testing.T) {
 				1: map[int64]stat.Stat{},
 			},
 		}, nil).Once()
-		m.On("IncrementShownCount", mock.Anything, mock.AnythingOfType("int64"), mock.AnythingOfType("int64"), mock.AnythingOfType("int64")).Return(errors.New("foo")).Once()
+		m.On(
+			"IncrementShownCount",
+			mock.Anything,
+			mock.AnythingOfType("int64"),
+			mock.AnythingOfType("int64"),
+			mock.AnythingOfType("int64"),
+		).Return(errors.New("foo")).Once()
 		err2 := service.IncrementShownCount(ctx, 1, 1, 1)
 		require.Error(t, err2)
 
@@ -167,8 +199,18 @@ func Test_IncrementShownCount(t *testing.T) {
 				1: map[int64]stat.Stat{},
 			},
 		}, nil).Once()
-		m.On("IncrementShownCount", mock.Anything, mock.AnythingOfType("int64"), mock.AnythingOfType("int64"), mock.AnythingOfType("int64")).Return(nil).Once()
-		p.On("Produce", mock.Anything, mock.AnythingOfType("payload.ShownStat")).Return(errors.New("foo")).Once()
+		m.On(
+			"IncrementShownCount",
+			mock.Anything,
+			mock.AnythingOfType("int64"),
+			mock.AnythingOfType("int64"),
+			mock.AnythingOfType("int64"),
+		).Return(nil).Once()
+		p.On(
+			"Produce",
+			mock.Anything,
+			mock.AnythingOfType("payload.ShownStat"),
+		).Return(errors.New("foo")).Once()
 		err3 := service.IncrementShownCount(ctx, 1, 1, 1)
 		require.Error(t, err3)
 	})
@@ -187,8 +229,18 @@ func Test_IncrementShownCount(t *testing.T) {
 				1: map[int64]stat.Stat{},
 			},
 		}, nil).Once()
-		m.On("IncrementShownCount", mock.Anything, mock.AnythingOfType("int64"), mock.AnythingOfType("int64"), mock.AnythingOfType("int64")).Return(nil).Once()
-		p.On("Produce", mock.Anything, mock.AnythingOfType("payload.ShownStat")).Return(nil).Once()
+		m.On(
+			"IncrementShownCount",
+			mock.Anything,
+			mock.AnythingOfType("int64"),
+			mock.AnythingOfType("int64"),
+			mock.AnythingOfType("int64"),
+		).Return(nil).Once()
+		p.On(
+			"Produce",
+			mock.Anything,
+			mock.AnythingOfType("payload.ShownStat"),
+		).Return(nil).Once()
 		err1 := service.IncrementShownCount(ctx, 1, 1, 1)
 		require.NoError(t, err1)
 	})
@@ -205,7 +257,13 @@ func Test_AddBannerToSlot(t *testing.T) {
 		p := mocks.NewProducer(t)
 		service := stat.NewService(m, p)
 
-		m.On("AddBannerToSlot", mock.Anything, mock.AnythingOfType("int64"), mock.AnythingOfType("int64"), mock.AnythingOfType("[]int64")).Return(errors.New("foo")).Once()
+		m.On(
+			"AddBannerToSlot",
+			mock.Anything,
+			mock.AnythingOfType("int64"),
+			mock.AnythingOfType("int64"),
+			mock.AnythingOfType("[]int64"),
+		).Return(errors.New("foo")).Once()
 		err := service.AddBannerToSlot(ctx, 1, 2, []int64{3})
 		require.Error(t, err)
 	})
@@ -218,7 +276,13 @@ func Test_AddBannerToSlot(t *testing.T) {
 		p := mocks.NewProducer(t)
 		service := stat.NewService(m, p)
 
-		m.On("AddBannerToSlot", mock.Anything, mock.AnythingOfType("int64"), mock.AnythingOfType("int64"), mock.AnythingOfType("[]int64")).Return(nil).Once()
+		m.On(
+			"AddBannerToSlot",
+			mock.Anything,
+			mock.AnythingOfType("int64"),
+			mock.AnythingOfType("int64"),
+			mock.AnythingOfType("[]int64"),
+		).Return(nil).Once()
 		err := service.AddBannerToSlot(ctx, 1, 2, []int64{3})
 		require.NoError(t, err)
 	})
@@ -235,7 +299,12 @@ func Test_RemoveBannerFromSlot(t *testing.T) {
 		p := mocks.NewProducer(t)
 		service := stat.NewService(m, p)
 
-		m.On("RemoveBannerFromSlot", mock.Anything, mock.AnythingOfType("int64"), mock.AnythingOfType("int64")).Return(errors.New("foo")).Once()
+		m.On(
+			"RemoveBannerFromSlot",
+			mock.Anything,
+			mock.AnythingOfType("int64"),
+			mock.AnythingOfType("int64"),
+		).Return(errors.New("foo")).Once()
 		err := service.RemoveBannerFromSlot(ctx, 1, 2)
 		require.Error(t, err)
 	})
@@ -248,7 +317,12 @@ func Test_RemoveBannerFromSlot(t *testing.T) {
 		p := mocks.NewProducer(t)
 		service := stat.NewService(m, p)
 
-		m.On("RemoveBannerFromSlot", mock.Anything, mock.AnythingOfType("int64"), mock.AnythingOfType("int64")).Return(nil).Once()
+		m.On(
+			"RemoveBannerFromSlot",
+			mock.Anything,
+			mock.AnythingOfType("int64"),
+			mock.AnythingOfType("int64"),
+		).Return(nil).Once()
 		err := service.RemoveBannerFromSlot(ctx, 1, 2)
 		require.NoError(t, err)
 	})

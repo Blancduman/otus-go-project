@@ -2,8 +2,8 @@ package cmd
 
 import (
 	"context"
-	"github.com/Blancduman/banners-rotation/internal/config"
 
+	"github.com/Blancduman/banners-rotation/internal/config"
 	"github.com/pkg/errors"
 	"github.com/spf13/cobra"
 )

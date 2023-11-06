@@ -24,12 +24,6 @@ func (s *Service) Shutdown(_ context.Context) error {
 
 func (s *Service) Get(ctx context.Context, id int64) (SocialDemGroup, error) {
 	socialDemGroup, err := s.repo.Get(ctx, id)
-	//if errors.Is(err, ErrNotFound) {
-	//	return SocialDemGroup{
-	//		ID:          id,
-	//		Description: "",
-	//	}, nil
-	//}
 
 	return socialDemGroup, errors.Wrapf(err, "get social dem group %d", id)
 }

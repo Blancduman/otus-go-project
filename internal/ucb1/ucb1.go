@@ -42,7 +42,7 @@ func Next(bannersStat BannerStat, scGroup int64) int64 {
 }
 
 func countShowsAmount(bannersStat BannerStat, scGroup int64) float64 {
-	var total int64 = 0
+	var total int64
 
 	for _, bannerStat := range bannersStat {
 		total += bannerStat[scGroup].Shown

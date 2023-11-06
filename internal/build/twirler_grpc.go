@@ -2,12 +2,11 @@ package build
 
 import (
 	"context"
-	twirler_v1 "github.com/Blancduman/banners-rotation/pkg/twirler/v1"
-
-	"github.com/pkg/errors"
-	"google.golang.org/grpc"
 
 	"github.com/Blancduman/banners-rotation/internal/grpc/external"
+	twirler_v1 "github.com/Blancduman/banners-rotation/pkg/twirler/v1"
+	"github.com/pkg/errors"
+	"google.golang.org/grpc"
 )
 
 func (b *Builder) ItemGRPCServer(ctx context.Context) (*grpc.Server, error) {
@@ -31,7 +30,7 @@ func (b *Builder) ItemGRPCServer(ctx context.Context) (*grpc.Server, error) {
 		return nil, errors.Wrap(err, "build stat service")
 	}
 
-	s, err := b.GRPCServer(ctx)
+	s, err := b.GRPCServer()
 	if err != nil {
 		return nil, errors.Wrap(err, "create gRPC server")
 	}

@@ -1,10 +1,8 @@
 package build
 
 import (
-	"context"
-	"go.mongodb.org/mongo-driver/mongo"
-
 	"github.com/Blancduman/banners-rotation/internal/config"
+	"go.mongodb.org/mongo-driver/mongo"
 )
 
 type Builder struct {
@@ -17,6 +15,6 @@ type Builder struct {
 	}
 }
 
-func New(ctx context.Context, conf config.Config) *Builder {
+func New(conf config.Config) *Builder {
 	return &Builder{config: conf} //nolint:exhaustruct
 }

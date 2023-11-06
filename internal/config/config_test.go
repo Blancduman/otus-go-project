@@ -4,10 +4,9 @@ import (
 	"os"
 	"testing"
 
+	"github.com/Blancduman/banners-rotation/internal/config"
 	"github.com/rs/zerolog"
 	"github.com/stretchr/testify/require"
-
-	"github.com/Blancduman/banners-rotation/internal/config"
 )
 
 func TestConfig(t *testing.T) {

@@ -2,6 +2,7 @@ package build
 
 import (
 	"context"
+
 	"github.com/Blancduman/banners-rotation/internal/catalog/stat"
 )
 

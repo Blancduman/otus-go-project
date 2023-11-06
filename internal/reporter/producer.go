@@ -4,11 +4,10 @@ import (
 	"context"
 	"time"
 
+	"github.com/Blancduman/banners-rotation/internal/reporter/payload"
 	"github.com/IBM/sarama"
 	"github.com/google/uuid"
 	"github.com/pkg/errors"
-
-	"github.com/Blancduman/banners-rotation/internal/reporter/payload"
 )
 
 type Producer struct {

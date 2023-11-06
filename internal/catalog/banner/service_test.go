@@ -2,13 +2,13 @@ package banner_test
 
 import (
 	"context"
-	"github.com/Blancduman/banners-rotation/internal/catalog/banner"
-	"github.com/pkg/errors"
-	"github.com/stretchr/testify/require"
 	"testing"
 
+	"github.com/Blancduman/banners-rotation/internal/catalog/banner"
 	"github.com/Blancduman/banners-rotation/internal/catalog/banner/mocks"
+	"github.com/pkg/errors"
 	"github.com/stretchr/testify/mock"
+	"github.com/stretchr/testify/require"
 )
 
 func Test_Get(t *testing.T) {

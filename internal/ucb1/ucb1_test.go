@@ -5,9 +5,8 @@ import (
 	"testing"
 	"time"
 
-	"github.com/stretchr/testify/assert"
-
 	"github.com/Blancduman/banners-rotation/internal/ucb1"
+	"github.com/stretchr/testify/assert"
 )
 
 const TRIES = 1000
@@ -39,19 +38,19 @@ func Test_UCB1(t *testing.T) {
 	clickFns := map[int64]func(){
 		1: func() {
 			bannerStat[1][1] = ucb1.Stat{
-				Clicked: bannerStat[1][1].Clicked + rand.Int63n(2) + 1,
+				Clicked: bannerStat[1][1].Clicked + rand.Int63n(2) + 1, //nolint: gosec
 				Shown:   bannerStat[1][1].Shown + 1,
 			}
 		},
 		2: func() {
 			bannerStat[2][1] = ucb1.Stat{
-				Clicked: bannerStat[2][1].Clicked + rand.Int63n(2),
+				Clicked: bannerStat[2][1].Clicked + rand.Int63n(2), //nolint: gosec
 				Shown:   bannerStat[2][1].Shown + 1,
 			}
 		},
 		3: func() {
 			bannerStat[3][1] = ucb1.Stat{
-				Clicked: bannerStat[3][1].Clicked + rand.Int63n(2),
+				Clicked: bannerStat[3][1].Clicked + rand.Int63n(2), //nolint: gosec
 				Shown:   bannerStat[3][1].Shown + 1,
 			}
 		},
