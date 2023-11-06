@@ -1,7 +1,6 @@
 package config
 
 import (
-	"fmt"
 	"os"
 
 	"github.com/joho/godotenv"
@@ -49,8 +48,4 @@ func (c *Config) LogLevel() (zerolog.Level, error) {
 	}
 
 	return lvl, nil
-}
-
-func (c *Config) HTTPAddr() string {
-	return fmt.Sprintf(":%d", c.HTTP.Port)
 }

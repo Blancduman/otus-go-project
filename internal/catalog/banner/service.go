@@ -24,12 +24,12 @@ func (s *Service) Shutdown(_ context.Context) error {
 
 func (s *Service) Get(ctx context.Context, id int64) (Banner, error) {
 	banner, err := s.repo.Get(ctx, id)
-	if errors.Is(err, ErrNotFound) {
-		return Banner{
-			ID:          id,
-			Description: "",
-		}, nil
-	}
+	//if errors.Is(err, ErrNotFound) {
+	//	return Banner{
+	//		ID:          id,
+	//		Description: "",
+	//	}, nil
+	//}
 
 	return banner, errors.Wrapf(err, "get banner %d", id)
 }

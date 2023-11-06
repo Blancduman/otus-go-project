@@ -109,18 +109,7 @@ func (s *Server) Gimme(ctx context.Context, req *twirler_v1.GimmeRequest) (*twir
 		return nil, errors.Wrap(err, "get social dem group from service")
 	}
 
-	stats := make(ucb1.BannerStat, len(slotStat.BannerStat))
-
-	for k1, v1 := range slotStat.BannerStat {
-		stats1 := make(ucb1.SocialDemGroupStat, len(v1))
-		for k2, v2 := range v1 {
-			stats1[k2] = ucb1.Stat{
-				Clicked: v2.Clicked,
-				Shown:   v2.Shown,
-			}
-		}
-		stats[k1] = stats1
-	}
+	stats := slotStat.BannerStat.ToUCB1()
 
 	bannerID := ucb1.Next(stats, sdGroup.ID)
 

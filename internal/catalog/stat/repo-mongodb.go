@@ -56,14 +56,14 @@ func (r RepoMongoDB) AddBannerToSlot(ctx context.Context, slotID int64, bannerID
 	m := bson.M{}
 
 	for _, v := range socialDemGroupIDs {
-		m[fmt.Sprintf("%d.%d.clicked", bannerID, v)] = 0
-		m[fmt.Sprintf("%d.%d.shown", bannerID, v)] = 0
+		m[fmt.Sprintf("bannerStat.%d.%d.clicked", bannerID, v)] = 0
+		m[fmt.Sprintf("bannerStat.%d.%d.shown", bannerID, v)] = 0
 	}
 
 	_, err := r.collection.UpdateOne(
 		ctx,
 		bson.M{"_id": slotID},
-		bson.M{"$set": bson.M{"bannerStat": m}},
+		bson.M{"$set": m},
 		options.Update().SetUpsert(true),
 	)
 
@@ -74,8 +74,8 @@ func (r RepoMongoDB) RemoveBannerFromSlot(ctx context.Context, slotID int64, ban
 	_, err := r.collection.UpdateOne(
 		ctx,
 		bson.M{"_id": slotID},
-		bson.M{"$unset": fmt.Sprintf("bannerStat.%d.%d", slotID, bannerID)},
-		options.Update().SetUpsert(true),
+		bson.M{"$unset": bson.M{fmt.Sprintf("bannerStat.%d", bannerID): ""}},
+		options.Update(),
 	)
 
 	return errors.Wrap(err, "remove banner to slot in stat")

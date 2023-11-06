@@ -36,12 +36,12 @@ func (s *Service) Create(ctx context.Context, slot Slot) (int64, error) {
 
 func (s *Service) Get(ctx context.Context, id int64) (Slot, error) {
 	slot, err := s.repo.Get(ctx, id)
-	if errors.Is(err, ErrNotFound) {
-		return Slot{
-			ID:          id,
-			Description: "",
-		}, nil
-	}
+	//if errors.Is(err, ErrNotFound) {
+	//	return Slot{
+	//		ID:          id,
+	//		Description: "",
+	//	}, nil
+	//}
 
 	return slot, errors.Wrapf(err, "get slot %d", id)
 }
