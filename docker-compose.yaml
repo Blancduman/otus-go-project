@@ -8,11 +8,11 @@ services:
       - 27017:27017
     expose:
       - 27017
-  grpc:
+  twirler:
     env_file:
       - .env
     restart: always
-    container_name: grpc
+    container_name: twirler
     build:
       context: .
       dockerfile: Dockerfile

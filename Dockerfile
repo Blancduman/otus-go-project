@@ -3,9 +3,9 @@ WORKDIR /app
 COPY go.mod go.sum ./
 RUN go mod download
 COPY . .
-RUN go build -o /bin/server
+RUN go build -o /bin/twirler
 
 FROM scratch
-COPY --from=BUILDER /bin/server /bin/
+COPY --from=BUILDER /bin/twirler /bin/
 EXPOSE 8081
-ENTRYPOINT ["/bin/server", "grpc"]
+ENTRYPOINT ["/bin/twirler", "grpc"]

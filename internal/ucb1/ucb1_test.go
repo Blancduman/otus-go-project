@@ -68,3 +68,32 @@ func Test_UCB1(t *testing.T) {
 	assert.LessOrEqual(t, float64(gimme[2])/TRIES*100, float64(20))
 	assert.LessOrEqual(t, float64(gimme[3])/TRIES*100, float64(20))
 }
+
+func Test_Every(t *testing.T) {
+	t.Parallel()
+
+	bannerStat := ucb1.BannerStat{
+		1:  {1: ucb1.Stat{Clicked: 0, Shown: 0}},
+		2:  {1: ucb1.Stat{Clicked: 0, Shown: 0}},
+		3:  {1: ucb1.Stat{Clicked: 0, Shown: 0}},
+		4:  {1: ucb1.Stat{Clicked: 0, Shown: 0}},
+		5:  {1: ucb1.Stat{Clicked: 0, Shown: 0}},
+		6:  {1: ucb1.Stat{Clicked: 0, Shown: 0}},
+		7:  {1: ucb1.Stat{Clicked: 0, Shown: 0}},
+		8:  {1: ucb1.Stat{Clicked: 0, Shown: 0}},
+		9:  {1: ucb1.Stat{Clicked: 0, Shown: 0}},
+		10: {1: ucb1.Stat{Clicked: 0, Shown: 0}},
+	}
+
+	for i := 1; i <= 10; i++ {
+		bannerID := ucb1.Next(bannerStat, 1)
+		bannerStat[bannerID][1] = ucb1.Stat{
+			Clicked: 0,
+			Shown:   bannerStat[bannerID][1].Shown + 1,
+		}
+	}
+
+	for _, v := range bannerStat {
+		assert.NotEqual(t, int64(0), v[1].Shown)
+	}
+}
