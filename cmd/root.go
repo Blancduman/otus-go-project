@@ -18,6 +18,7 @@ func Run(ctx context.Context, conf config.Config) error {
 
 	root.AddCommand(
 		grpcCmd(ctx, conf),
+		migrateCmd(ctx, conf),
 	)
 
 	return errors.Wrap(root.ExecuteContext(ctx), "run application")

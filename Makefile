@@ -30,4 +30,10 @@ install-lint-deps:
 lint: install-lint-deps
 	golangci-lint run ./...
 
+migrate-up:
+	go run main.go migrate up
+
+migrate-down:
+	go run main.go migrate down
+
 .PHONY: build run build-img run-img test lint

@@ -23,8 +23,6 @@ func (p *Producer) Produce(_ context.Context, pl payload.Payload) error {
 		return errors.Wrapf(err, "encode %s payload", pl.Type())
 	}
 
-	// задать заголовки, метаданные и т.д. можно и нужно с помощью мидлвар для sarama.SyncProducer
-	// не юзай watermill и т.п.
 	_, _, err = p.SaramaSyncProducer.SendMessage(&sarama.ProducerMessage{
 		Topic:     p.Topic,
 		Key:       sarama.ByteEncoder(key[:]),
