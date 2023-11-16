@@ -3,13 +3,12 @@ package build
 import (
 	"context"
 
+	"github.com/Blancduman/banners-rotation/internal/migration"
 	"github.com/golang-migrate/migrate/v4"
 	"github.com/golang-migrate/migrate/v4/database/mongodb"
 	"github.com/golang-migrate/migrate/v4/source/iofs"
 	"github.com/pkg/errors"
 	"go.mongodb.org/mongo-driver/mongo"
-
-	"github.com/Blancduman/banners-rotation/internal/migration"
 )
 
 func (b *Builder) CatalogMigration(ctx context.Context) (*migrate.Migrate, error) {
@@ -21,7 +20,12 @@ func (b *Builder) CatalogMigration(ctx context.Context) (*migrate.Migrate, error
 	return b.mongoMigration(client, b.config.Mongo.DB, migration.CatalogPath, "schema_migrations")
 }
 
-func (b *Builder) mongoMigration(client *mongo.Client, database string, path string, collection string) (*migrate.Migrate, error) {
+func (b *Builder) mongoMigration(
+	client *mongo.Client,
+	database string,
+	path string,
+	collection string,
+) (*migrate.Migrate, error) {
 	fs, err := iofs.New(migration.FS, path)
 	if err != nil {
 		return nil, errors.Wrap(err, "build migrations iofs")

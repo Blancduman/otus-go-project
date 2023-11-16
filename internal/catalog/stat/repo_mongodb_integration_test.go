@@ -109,7 +109,8 @@ func (s *MongoDBRepoTestSuite) Test_IncrementShownCount() {
 	var socialGroupID int64
 
 	ctx := context.TODO()
-	slSt := fixture1()
+	slSt, err := s.repo.GetStat(ctx, fixture1().ID)
+	s.Require().NoError(err)
 
 	for k, v := range slSt.BannerStat {
 		bannerID = k
@@ -122,10 +123,10 @@ func (s *MongoDBRepoTestSuite) Test_IncrementShownCount() {
 		break
 	}
 
-	err := s.repo.IncrementShownCount(ctx, slSt.ID, bannerID, socialGroupID)
+	err = s.repo.IncrementShownCount(ctx, slSt.SlotID, bannerID, socialGroupID)
 	s.Require().NoError(err)
 
-	slotStat, err := s.repo.GetStat(ctx, slSt.ID)
+	slotStat, err := s.repo.GetStat(ctx, slSt.SlotID)
 	s.Require().NoError(err)
 	s.Require().Equal(int64(2), slotStat.BannerStat[bannerID][socialGroupID].Shown)
 }

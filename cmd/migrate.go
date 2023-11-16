@@ -2,6 +2,7 @@ package cmd
 
 import (
 	"context"
+
 	"github.com/Blancduman/banners-rotation/internal/build"
 	"github.com/Blancduman/banners-rotation/internal/config"
 	"github.com/pkg/errors"
