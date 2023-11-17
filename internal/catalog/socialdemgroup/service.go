@@ -24,14 +24,17 @@ func (s *Service) Shutdown(_ context.Context) error {
 
 func (s *Service) Get(ctx context.Context, id int64) (SocialDemGroup, error) {
 	socialDemGroup, err := s.repo.Get(ctx, id)
-	if errors.Is(err, ErrNotFound) {
-		return SocialDemGroup{
-			ID:          id,
-			Description: "",
-		}, nil
-	}
 
 	return socialDemGroup, errors.Wrapf(err, "get social dem group %d", id)
+}
+
+func (s *Service) GetAll(ctx context.Context) ([]SocialDemGroup, error) {
+	socialDemGroups, err := s.repo.GetAll(ctx)
+	if errors.Is(err, ErrNotFound) {
+		return nil, nil
+	}
+
+	return socialDemGroups, errors.Wrap(err, "get all social dem group")
 }
 
 func (s *Service) Create(ctx context.Context, socialDemGroup SocialDemGroup) (int64, error) {
@@ -43,7 +46,7 @@ func (s *Service) Create(ctx context.Context, socialDemGroup SocialDemGroup) (in
 	ID, err := s.repo.Create(ctx, socialDemGroup)
 	s.wg.Done()
 
-	return ID, errors.Wrapf(err, "create social dem group %s", socialDemGroup)
+	return ID, errors.Wrap(err, "create social dem group")
 }
 
 func (s *Service) Update(ctx context.Context, socialDemGroup SocialDemGroup) error {
@@ -51,7 +54,7 @@ func (s *Service) Update(ctx context.Context, socialDemGroup SocialDemGroup) err
 	_, err := s.repo.Update(ctx, socialDemGroup)
 	s.wg.Done()
 
-	return errors.Wrapf(err, "update social dem group %s", socialDemGroup)
+	return errors.Wrap(err, "update social dem group")
 }
 
 func (s *Service) Delete(ctx context.Context, id int64) error {

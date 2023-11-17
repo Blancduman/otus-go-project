@@ -1,0 +1,107 @@
+[
+  {
+    "update": "banner",
+    "updates": [
+      {
+        "q": {
+          "_id": 0
+        },
+        "u": {
+          "_id": 0,
+          "description": "This is banner 0"
+        },
+        "upsert": true
+      },
+      {
+        "q": {
+          "_id":1
+        },
+        "u": {
+          "_id": 1,
+          "description": "This is banner 1"
+        },
+        "upsert": true
+      },
+      {
+        "q": {
+          "_id": 2
+        },
+        "u": {
+          "_id": 2,
+          "description": "This is banner 2"
+        },
+        "upsert": true
+      },
+      {
+        "q": {
+          "_id": 3
+        },
+        "u": {
+          "_id": 3,
+          "description": "This is banner 3"
+        },
+        "upsert": true
+      },
+      {
+        "q": {
+          "_id": 4
+        },
+        "u": {
+          "_id": 4,
+          "description": "This is banner 4"
+        },
+        "upsert": true
+      },
+      {
+        "q": {
+          "_id": 5
+        },
+        "u": {
+          "_id": 5,
+          "description": "This is banner 5"
+        },
+        "upsert": true
+      },
+      {
+        "q": {
+          "_id": 6
+        },
+        "u": {
+          "_id": 6,
+          "description": "This is banner 6"
+        },
+        "upsert": true
+      },
+      {
+        "q": {
+          "_id": 7
+        },
+        "u": {
+          "_id": 7,
+          "description": "This is banner 7"
+        },
+        "upsert": true
+      },
+      {
+        "q": {
+          "_id": 8
+        },
+        "u": {
+          "_id": 8,
+          "description": "This is banner 8"
+        },
+        "upsert": true
+      },
+      {
+        "q": {
+          "_id": 9
+        },
+        "u": {
+          "_id": 9,
+          "description": "This is banner 9"
+        },
+        "upsert": true
+      }
+    ]
+  }
+]

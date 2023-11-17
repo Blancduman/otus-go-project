@@ -24,12 +24,6 @@ func (s *Service) Shutdown(_ context.Context) error {
 
 func (s *Service) Get(ctx context.Context, id int64) (Banner, error) {
 	banner, err := s.repo.Get(ctx, id)
-	if errors.Is(err, ErrNotFound) {
-		return Banner{
-			ID:          id,
-			Description: "",
-		}, nil
-	}
 
 	return banner, errors.Wrapf(err, "get banner %d", id)
 }
@@ -43,7 +37,7 @@ func (s *Service) Create(ctx context.Context, banner Banner) (int64, error) {
 	ID, err := s.repo.Create(ctx, banner)
 	s.wg.Done()
 
-	return ID, errors.Wrapf(err, "create banner %s", banner)
+	return ID, errors.Wrap(err, "create banner")
 }
 
 func (s *Service) Update(ctx context.Context, banner Banner) error {
@@ -51,7 +45,7 @@ func (s *Service) Update(ctx context.Context, banner Banner) error {
 	_, err := s.repo.Update(ctx, banner)
 	s.wg.Done()
 
-	return errors.Wrapf(err, "update banner %s", banner)
+	return errors.Wrap(err, "update banner")
 }
 
 func (s *Service) Delete(ctx context.Context, id int64) error {

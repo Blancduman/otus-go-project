@@ -1,0 +1,57 @@
+[
+  {
+    "update": "socialDemGroup",
+    "updates": [
+      {
+        "q": {
+          "_id": 0
+        },
+        "u": {
+          "_id": 0,
+          "description": "This is slot 0"
+        },
+        "upsert": true
+      },
+      {
+        "q": {
+          "_id":1
+        },
+        "u": {
+          "_id": 1,
+          "description": "This is slot 1"
+        },
+        "upsert": true
+      },
+      {
+        "q": {
+          "_id": 2
+        },
+        "u": {
+          "_id": 2,
+          "description": "This is slot 2"
+        },
+        "upsert": true
+      },
+      {
+        "q": {
+          "_id": 3
+        },
+        "u": {
+          "_id": 3,
+          "description": "This is slot 3"
+        },
+        "upsert": true
+      },
+      {
+        "q": {
+          "_id": 4
+        },
+        "u": {
+          "_id": 4,
+          "description": "This is slot 4"
+        },
+        "upsert": true
+      }
+    ]
+  }
+]

@@ -19,20 +19,26 @@ import (
 const _ = grpc.SupportPackageIsVersion7
 
 const (
-	TwirlerAPI_AttachBanner_FullMethodName   = "/twirler.v1.TwirlerAPI/AttachBanner"
-	TwirlerAPI_DetachBanner_FullMethodName   = "/twirler.v1.TwirlerAPI/DetachBanner"
-	TwirlerAPI_IncrementCount_FullMethodName = "/twirler.v1.TwirlerAPI/IncrementCount"
-	TwirlerAPI_Gimme_FullMethodName          = "/twirler.v1.TwirlerAPI/Gimme"
+	TwirlerAPI_AttachBanner_FullMethodName         = "/twirler.v1.TwirlerAPI/AttachBanner"
+	TwirlerAPI_DetachBanner_FullMethodName         = "/twirler.v1.TwirlerAPI/DetachBanner"
+	TwirlerAPI_IncrementCount_FullMethodName       = "/twirler.v1.TwirlerAPI/IncrementCount"
+	TwirlerAPI_Gimme_FullMethodName                = "/twirler.v1.TwirlerAPI/Gimme"
+	TwirlerAPI_CreateBanner_FullMethodName         = "/twirler.v1.TwirlerAPI/CreateBanner"
+	TwirlerAPI_CreateSlot_FullMethodName           = "/twirler.v1.TwirlerAPI/CreateSlot"
+	TwirlerAPI_CreateSocialDemGroup_FullMethodName = "/twirler.v1.TwirlerAPI/CreateSocialDemGroup"
 )
 
 // TwirlerAPIClient is the client API for TwirlerAPI service.
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type TwirlerAPIClient interface {
-	AttachBanner(ctx context.Context, in *AttachBannerRequest, opts ...grpc.CallOption) (*AttachBannerResponse, error)
-	DetachBanner(ctx context.Context, in *DetachBannerRequest, opts ...grpc.CallOption) (*DetachBannerResponse, error)
+	AttachBanner(ctx context.Context, in *AttachBannerToSlotRequest, opts ...grpc.CallOption) (*AttachBannerToSlotResponse, error)
+	DetachBanner(ctx context.Context, in *DetachBannerToSlotRequest, opts ...grpc.CallOption) (*DetachBannerToSlotResponse, error)
 	IncrementCount(ctx context.Context, in *IncrementCountRequest, opts ...grpc.CallOption) (*IncrementCountResponse, error)
 	Gimme(ctx context.Context, in *GimmeRequest, opts ...grpc.CallOption) (*GimmeResponse, error)
+	CreateBanner(ctx context.Context, in *BannerCreateRequest, opts ...grpc.CallOption) (*BannerCreateResponse, error)
+	CreateSlot(ctx context.Context, in *SlotCreateRequest, opts ...grpc.CallOption) (*SlotCreateResponse, error)
+	CreateSocialDemGroup(ctx context.Context, in *SocialDemGroupCreateRequest, opts ...grpc.CallOption) (*SocialDemGroupCreateResponse, error)
 }
 
 type twirlerAPIClient struct {
@@ -43,8 +49,8 @@ func NewTwirlerAPIClient(cc grpc.ClientConnInterface) TwirlerAPIClient {
 	return &twirlerAPIClient{cc}
 }
 
-func (c *twirlerAPIClient) AttachBanner(ctx context.Context, in *AttachBannerRequest, opts ...grpc.CallOption) (*AttachBannerResponse, error) {
-	out := new(AttachBannerResponse)
+func (c *twirlerAPIClient) AttachBanner(ctx context.Context, in *AttachBannerToSlotRequest, opts ...grpc.CallOption) (*AttachBannerToSlotResponse, error) {
+	out := new(AttachBannerToSlotResponse)
 	err := c.cc.Invoke(ctx, TwirlerAPI_AttachBanner_FullMethodName, in, out, opts...)
 	if err != nil {
 		return nil, err
@@ -52,8 +58,8 @@ func (c *twirlerAPIClient) AttachBanner(ctx context.Context, in *AttachBannerReq
 	return out, nil
 }
 
-func (c *twirlerAPIClient) DetachBanner(ctx context.Context, in *DetachBannerRequest, opts ...grpc.CallOption) (*DetachBannerResponse, error) {
-	out := new(DetachBannerResponse)
+func (c *twirlerAPIClient) DetachBanner(ctx context.Context, in *DetachBannerToSlotRequest, opts ...grpc.CallOption) (*DetachBannerToSlotResponse, error) {
+	out := new(DetachBannerToSlotResponse)
 	err := c.cc.Invoke(ctx, TwirlerAPI_DetachBanner_FullMethodName, in, out, opts...)
 	if err != nil {
 		return nil, err
@@ -79,24 +85,54 @@ func (c *twirlerAPIClient) Gimme(ctx context.Context, in *GimmeRequest, opts ...
 	return out, nil
 }
 
+func (c *twirlerAPIClient) CreateBanner(ctx context.Context, in *BannerCreateRequest, opts ...grpc.CallOption) (*BannerCreateResponse, error) {
+	out := new(BannerCreateResponse)
+	err := c.cc.Invoke(ctx, TwirlerAPI_CreateBanner_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *twirlerAPIClient) CreateSlot(ctx context.Context, in *SlotCreateRequest, opts ...grpc.CallOption) (*SlotCreateResponse, error) {
+	out := new(SlotCreateResponse)
+	err := c.cc.Invoke(ctx, TwirlerAPI_CreateSlot_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *twirlerAPIClient) CreateSocialDemGroup(ctx context.Context, in *SocialDemGroupCreateRequest, opts ...grpc.CallOption) (*SocialDemGroupCreateResponse, error) {
+	out := new(SocialDemGroupCreateResponse)
+	err := c.cc.Invoke(ctx, TwirlerAPI_CreateSocialDemGroup_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // TwirlerAPIServer is the server API for TwirlerAPI service.
 // All implementations should embed UnimplementedTwirlerAPIServer
 // for forward compatibility
 type TwirlerAPIServer interface {
-	AttachBanner(context.Context, *AttachBannerRequest) (*AttachBannerResponse, error)
-	DetachBanner(context.Context, *DetachBannerRequest) (*DetachBannerResponse, error)
+	AttachBanner(context.Context, *AttachBannerToSlotRequest) (*AttachBannerToSlotResponse, error)
+	DetachBanner(context.Context, *DetachBannerToSlotRequest) (*DetachBannerToSlotResponse, error)
 	IncrementCount(context.Context, *IncrementCountRequest) (*IncrementCountResponse, error)
 	Gimme(context.Context, *GimmeRequest) (*GimmeResponse, error)
+	CreateBanner(context.Context, *BannerCreateRequest) (*BannerCreateResponse, error)
+	CreateSlot(context.Context, *SlotCreateRequest) (*SlotCreateResponse, error)
+	CreateSocialDemGroup(context.Context, *SocialDemGroupCreateRequest) (*SocialDemGroupCreateResponse, error)
 }
 
 // UnimplementedTwirlerAPIServer should be embedded to have forward compatible implementations.
 type UnimplementedTwirlerAPIServer struct {
 }
 
-func (UnimplementedTwirlerAPIServer) AttachBanner(context.Context, *AttachBannerRequest) (*AttachBannerResponse, error) {
+func (UnimplementedTwirlerAPIServer) AttachBanner(context.Context, *AttachBannerToSlotRequest) (*AttachBannerToSlotResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method AttachBanner not implemented")
 }
-func (UnimplementedTwirlerAPIServer) DetachBanner(context.Context, *DetachBannerRequest) (*DetachBannerResponse, error) {
+func (UnimplementedTwirlerAPIServer) DetachBanner(context.Context, *DetachBannerToSlotRequest) (*DetachBannerToSlotResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method DetachBanner not implemented")
 }
 func (UnimplementedTwirlerAPIServer) IncrementCount(context.Context, *IncrementCountRequest) (*IncrementCountResponse, error) {
@@ -104,6 +140,15 @@ func (UnimplementedTwirlerAPIServer) IncrementCount(context.Context, *IncrementC
 }
 func (UnimplementedTwirlerAPIServer) Gimme(context.Context, *GimmeRequest) (*GimmeResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method Gimme not implemented")
+}
+func (UnimplementedTwirlerAPIServer) CreateBanner(context.Context, *BannerCreateRequest) (*BannerCreateResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method CreateBanner not implemented")
+}
+func (UnimplementedTwirlerAPIServer) CreateSlot(context.Context, *SlotCreateRequest) (*SlotCreateResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method CreateSlot not implemented")
+}
+func (UnimplementedTwirlerAPIServer) CreateSocialDemGroup(context.Context, *SocialDemGroupCreateRequest) (*SocialDemGroupCreateResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method CreateSocialDemGroup not implemented")
 }
 
 // UnsafeTwirlerAPIServer may be embedded to opt out of forward compatibility for this service.
@@ -118,7 +163,7 @@ func RegisterTwirlerAPIServer(s grpc.ServiceRegistrar, srv TwirlerAPIServer) {
 }
 
 func _TwirlerAPI_AttachBanner_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(AttachBannerRequest)
+	in := new(AttachBannerToSlotRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
@@ -130,13 +175,13 @@ func _TwirlerAPI_AttachBanner_Handler(srv interface{}, ctx context.Context, dec 
 		FullMethod: TwirlerAPI_AttachBanner_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(TwirlerAPIServer).AttachBanner(ctx, req.(*AttachBannerRequest))
+		return srv.(TwirlerAPIServer).AttachBanner(ctx, req.(*AttachBannerToSlotRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
 func _TwirlerAPI_DetachBanner_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(DetachBannerRequest)
+	in := new(DetachBannerToSlotRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
@@ -148,7 +193,7 @@ func _TwirlerAPI_DetachBanner_Handler(srv interface{}, ctx context.Context, dec 
 		FullMethod: TwirlerAPI_DetachBanner_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(TwirlerAPIServer).DetachBanner(ctx, req.(*DetachBannerRequest))
+		return srv.(TwirlerAPIServer).DetachBanner(ctx, req.(*DetachBannerToSlotRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -189,6 +234,60 @@ func _TwirlerAPI_Gimme_Handler(srv interface{}, ctx context.Context, dec func(in
 	return interceptor(ctx, in, info, handler)
 }
 
+func _TwirlerAPI_CreateBanner_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(BannerCreateRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(TwirlerAPIServer).CreateBanner(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: TwirlerAPI_CreateBanner_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(TwirlerAPIServer).CreateBanner(ctx, req.(*BannerCreateRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _TwirlerAPI_CreateSlot_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(SlotCreateRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(TwirlerAPIServer).CreateSlot(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: TwirlerAPI_CreateSlot_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(TwirlerAPIServer).CreateSlot(ctx, req.(*SlotCreateRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _TwirlerAPI_CreateSocialDemGroup_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(SocialDemGroupCreateRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(TwirlerAPIServer).CreateSocialDemGroup(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: TwirlerAPI_CreateSocialDemGroup_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(TwirlerAPIServer).CreateSocialDemGroup(ctx, req.(*SocialDemGroupCreateRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // TwirlerAPI_ServiceDesc is the grpc.ServiceDesc for TwirlerAPI service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -211,6 +310,18 @@ var TwirlerAPI_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "Gimme",
 			Handler:    _TwirlerAPI_Gimme_Handler,
+		},
+		{
+			MethodName: "CreateBanner",
+			Handler:    _TwirlerAPI_CreateBanner_Handler,
+		},
+		{
+			MethodName: "CreateSlot",
+			Handler:    _TwirlerAPI_CreateSlot_Handler,
+		},
+		{
+			MethodName: "CreateSocialDemGroup",
+			Handler:    _TwirlerAPI_CreateSocialDemGroup_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

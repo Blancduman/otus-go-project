@@ -1,0 +1,477 @@
+[
+  {
+    "update": "stat",
+    "updates": [
+      {
+        "q": {
+          "_id": 0
+        },
+        "u": {
+          "bannerStat": {
+            "0": {
+              "0": {
+                "shown": 0,
+                "clicked": 0
+              },
+              "1": {
+                "shown": 0,
+                "clicked": 0
+              },
+              "2": {
+                "shown": 0,
+                "clicked": 0
+              },
+              "3": {
+                "shown": 0,
+                "clicked": 0
+              },
+              "4": {
+                "shown": 0,
+                "clicked": 0
+              },
+              "5": {
+                "shown": 0,
+                "clicked": 0
+              },
+              "6": {
+                "shown": 0,
+                "clicked": 0
+              },
+              "7": {
+                "shown": 0,
+                "clicked": 0
+              },
+              "8": {
+                "shown": 0,
+                "clicked": 0
+              },
+              "9": {
+                "shown": 0,
+                "clicked": 0
+              }
+            },
+            "1": {
+              "0": {
+                "shown": 0,
+                "clicked": 0
+              },
+              "1": {
+                "shown": 0,
+                "clicked": 0
+              },
+              "2": {
+                "shown": 0,
+                "clicked": 0
+              },
+              "3": {
+                "shown": 0,
+                "clicked": 0
+              },
+              "4": {
+                "shown": 0,
+                "clicked": 0
+              },
+              "5": {
+                "shown": 0,
+                "clicked": 0
+              },
+              "6": {
+                "shown": 0,
+                "clicked": 0
+              },
+              "7": {
+                "shown": 0,
+                "clicked": 0
+              },
+              "8": {
+                "shown": 0,
+                "clicked": 0
+              },
+              "9": {
+                "shown": 0,
+                "clicked": 0
+              }
+            }
+          }
+        },
+        "upsert": true
+      },
+      {
+        "q": {
+          "_id": 1
+        },
+        "u": {
+          "bannerStat": {
+            "2": {
+              "0": {
+                "shown": 0,
+                "clicked": 0
+              },
+              "1": {
+                "shown": 0,
+                "clicked": 0
+              },
+              "2": {
+                "shown": 0,
+                "clicked": 0
+              },
+              "3": {
+                "shown": 0,
+                "clicked": 0
+              },
+              "4": {
+                "shown": 0,
+                "clicked": 0
+              },
+              "5": {
+                "shown": 0,
+                "clicked": 0
+              },
+              "6": {
+                "shown": 0,
+                "clicked": 0
+              },
+              "7": {
+                "shown": 0,
+                "clicked": 0
+              },
+              "8": {
+                "shown": 0,
+                "clicked": 0
+              },
+              "9": {
+                "shown": 0,
+                "clicked": 0
+              }
+            },
+            "3": {
+              "0": {
+                "shown": 0,
+                "clicked": 0
+              },
+              "1": {
+                "shown": 0,
+                "clicked": 0
+              },
+              "2": {
+                "shown": 0,
+                "clicked": 0
+              },
+              "3": {
+                "shown": 0,
+                "clicked": 0
+              },
+              "4": {
+                "shown": 0,
+                "clicked": 0
+              },
+              "5": {
+                "shown": 0,
+                "clicked": 0
+              },
+              "6": {
+                "shown": 0,
+                "clicked": 0
+              },
+              "7": {
+                "shown": 0,
+                "clicked": 0
+              },
+              "8": {
+                "shown": 0,
+                "clicked": 0
+              },
+              "9": {
+                "shown": 0,
+                "clicked": 0
+              }
+            }
+          }
+        },
+        "upsert": true
+      },
+      {
+        "q": {
+          "_id": 2
+        },
+        "u": {
+          "bannerStat": {
+            "4": {
+              "0": {
+                "shown": 0,
+                "clicked": 0
+              },
+              "1": {
+                "shown": 0,
+                "clicked": 0
+              },
+              "2": {
+                "shown": 0,
+                "clicked": 0
+              },
+              "3": {
+                "shown": 0,
+                "clicked": 0
+              },
+              "4": {
+                "shown": 0,
+                "clicked": 0
+              },
+              "5": {
+                "shown": 0,
+                "clicked": 0
+              },
+              "6": {
+                "shown": 0,
+                "clicked": 0
+              },
+              "7": {
+                "shown": 0,
+                "clicked": 0
+              },
+              "8": {
+                "shown": 0,
+                "clicked": 0
+              },
+              "9": {
+                "shown": 0,
+                "clicked": 0
+              }
+            },
+            "5": {
+              "0": {
+                "shown": 0,
+                "clicked": 0
+              },
+              "1": {
+                "shown": 0,
+                "clicked": 0
+              },
+              "2": {
+                "shown": 0,
+                "clicked": 0
+              },
+              "3": {
+                "shown": 0,
+                "clicked": 0
+              },
+              "4": {
+                "shown": 0,
+                "clicked": 0
+              },
+              "5": {
+                "shown": 0,
+                "clicked": 0
+              },
+              "6": {
+                "shown": 0,
+                "clicked": 0
+              },
+              "7": {
+                "shown": 0,
+                "clicked": 0
+              },
+              "8": {
+                "shown": 0,
+                "clicked": 0
+              },
+              "9": {
+                "shown": 0,
+                "clicked": 0
+              }
+            }
+          }
+        },
+        "upsert": true
+      },
+      {
+        "q": {
+          "_id": 3
+        },
+        "u": {
+          "bannerStat": {
+            "6": {
+              "0": {
+                "shown": 0,
+                "clicked": 0
+              },
+              "1": {
+                "shown": 0,
+                "clicked": 0
+              },
+              "2": {
+                "shown": 0,
+                "clicked": 0
+              },
+              "3": {
+                "shown": 0,
+                "clicked": 0
+              },
+              "4": {
+                "shown": 0,
+                "clicked": 0
+              },
+              "5": {
+                "shown": 0,
+                "clicked": 0
+              },
+              "6": {
+                "shown": 0,
+                "clicked": 0
+              },
+              "7": {
+                "shown": 0,
+                "clicked": 0
+              },
+              "8": {
+                "shown": 0,
+                "clicked": 0
+              },
+              "9": {
+                "shown": 0,
+                "clicked": 0
+              }
+            },
+            "7": {
+              "0": {
+                "shown": 0,
+                "clicked": 0
+              },
+              "1": {
+                "shown": 0,
+                "clicked": 0
+              },
+              "2": {
+                "shown": 0,
+                "clicked": 0
+              },
+              "3": {
+                "shown": 0,
+                "clicked": 0
+              },
+              "4": {
+                "shown": 0,
+                "clicked": 0
+              },
+              "5": {
+                "shown": 0,
+                "clicked": 0
+              },
+              "6": {
+                "shown": 0,
+                "clicked": 0
+              },
+              "7": {
+                "shown": 0,
+                "clicked": 0
+              },
+              "8": {
+                "shown": 0,
+                "clicked": 0
+              },
+              "9": {
+                "shown": 0,
+                "clicked": 0
+              }
+            }
+          }
+        },
+        "upsert": true
+      },
+      {
+        "q": {
+          "_id": 4
+        },
+        "u": {
+          "bannerStat": {
+            "8": {
+              "0": {
+                "shown": 0,
+                "clicked": 0
+              },
+              "1": {
+                "shown": 0,
+                "clicked": 0
+              },
+              "2": {
+                "shown": 0,
+                "clicked": 0
+              },
+              "3": {
+                "shown": 0,
+                "clicked": 0
+              },
+              "4": {
+                "shown": 0,
+                "clicked": 0
+              },
+              "5": {
+                "shown": 0,
+                "clicked": 0
+              },
+              "6": {
+                "shown": 0,
+                "clicked": 0
+              },
+              "7": {
+                "shown": 0,
+                "clicked": 0
+              },
+              "8": {
+                "shown": 0,
+                "clicked": 0
+              },
+              "9": {
+                "shown": 0,
+                "clicked": 0
+              }
+            },
+            "9": {
+              "0": {
+                "shown": 0,
+                "clicked": 0
+              },
+              "1": {
+                "shown": 0,
+                "clicked": 0
+              },
+              "2": {
+                "shown": 0,
+                "clicked": 0
+              },
+              "3": {
+                "shown": 0,
+                "clicked": 0
+              },
+              "4": {
+                "shown": 0,
+                "clicked": 0
+              },
+              "5": {
+                "shown": 0,
+                "clicked": 0
+              },
+              "6": {
+                "shown": 0,
+                "clicked": 0
+              },
+              "7": {
+                "shown": 0,
+                "clicked": 0
+              },
+              "8": {
+                "shown": 0,
+                "clicked": 0
+              },
+              "9": {
+                "shown": 0,
+                "clicked": 0
+              }
+            }
+          }
+        },
+        "upsert": true
+      }
+    ]
+  }
+]
